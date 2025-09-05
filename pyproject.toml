@@ -24,7 +24,7 @@ target-version = "py313"
 line-length = 79
 indent-width = 4
 indent-style = "space"
-select = ["E", "F", "W", "ANN", "PL", "RUF", "DJ", "I", "N"]
+select = ["E", "F", "W", "ANN", "PL", "RUF", "DJ", "I", "N", "S", "PT",]
 
 extend-exclude = [
   "manage.py"
