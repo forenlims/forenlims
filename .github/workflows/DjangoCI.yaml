@@ -1,3 +1,6 @@
+permissions:
+  contents: read
+
 name: Django CI
 
 on:
@@ -24,12 +27,12 @@ jobs:
       uses: matrix-org/setup-python-poetry@v2
 
     - name: Cache Poetry packages
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
-        path: |
-          path: ~/.cache/pypoetry
+        path: ~/.cache/pypoetry
         key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-        restore-keys: ${{ runner.os }}-poetry-
+        restore-keys: |
+          ${{ runner.os }}-poetry-
 
     - name: Install dependencies
       run: poetry install
