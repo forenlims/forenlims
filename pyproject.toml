@@ -9,6 +9,7 @@ license = {text = "Apache License 2.0"}
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "django (>=5.2.6,<6.0.0)"
 ]
 
 [build-system]
@@ -27,12 +28,12 @@ djlint = "^1.36.4"
 target-version = "py313"
 line-length = 79
 indent-width = 4
-select = ["E", "F", "W", "ANN", "PL", "RUF", "DJ", "I", "N", "S", "PT",]
+lint.select = ["E", "F", "W", "ANN", "PL", "RUF", "DJ", "I", "N", "S", "PT",]
 
 extend-exclude = [
   "manage.py"
 ]
-extend-ignore = [ "RUF012" ]
+lint.extend-ignore = [ "RUF012" ]
 
 [tool.djlint]
 profile="django"
