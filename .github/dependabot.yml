@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "poetry"
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
@@ -15,7 +15,7 @@ updates:
     reviewers:
       - onkeld
     target-branch: main
-  - package-ecosystem: "poetry"
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
