@@ -11,19 +11,22 @@ requires-python = ">=3.13"
 dependencies = [
 ]
 
-
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+package-mode = false
+
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.3.0"
+ruff = "^0.12.12"
+djlint = "^1.36.4"
 
 [tool.ruff]
 target-version = "py313"
 line-length = 79
 indent-width = 4
-indent-style = "space"
 select = ["E", "F", "W", "ANN", "PL", "RUF", "DJ", "I", "N", "S", "PT",]
 
 extend-exclude = [
@@ -33,3 +36,7 @@ extend-ignore = [ "RUF012" ]
 
 [tool.djlint]
 profile="django"
+
+[tool.poetry.scripts]
+lint-check = "scripts.check:main"
+lint-fix = "scripts.fix:main"
