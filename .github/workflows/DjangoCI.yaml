@@ -20,8 +20,7 @@ jobs:
 
     - name: Set up Poetry
       uses: matrix-org/setup-python-poetry@v2
-      with:
-        poetry-version: latest
+
 
     - name: Install dependencies
       run: poetry install --no-root
