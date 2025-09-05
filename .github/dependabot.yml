@@ -13,12 +13,3 @@ updates:
       - dependency-name: "django"
         versions: ["<4.4"] # optional, falls noch alte Django-Version getestet wird
     target-branch: main
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    commit-message:
-      prefix: "security"
-    allow:
-      - dependency-type: "all"
-    target-branch: main
