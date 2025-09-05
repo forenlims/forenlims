@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: "poetry"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 10
+    allow:
+      - dependency-type: "all"
+    ignore:
+      - dependency-name: "django"
+        versions: ["<4.4"] # optional, falls noch alte Django-Version getestet wird
+    reviewers:
+      - onkeld
+    target-branch: main
+  - package-ecosystem: "poetry"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "security"
+    allow:
+      - dependency-type: "all"
+    target-branch: main
