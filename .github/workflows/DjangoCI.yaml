@@ -1,6 +1,8 @@
 name: Django CI
 
 on:
+
+  pull_request:
   push:
     branches:
       - main
@@ -20,6 +22,8 @@ jobs:
 
     - name: Set up Poetry
       uses: matrix-org/setup-python-poetry@v2
+      with:
+        cache: true
 
 
     - name: Install dependencies
