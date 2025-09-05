@@ -1,27 +1,25 @@
 version: 1
 name: "Feature request"
-about: "Propose a new feature or enhancement. Describe the user need, proposed solution and benefits."
+description: "Propose a new feature or enhancement. Describe the user need, proposed solution and benefits."
 title: "[feature] {short_description}"
 labels: ["enhancement", "feature"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for proposing an improvement. Please provide a clear user story, the proposed solution, and why this change is valuable. If this is a large change, link any designs or related discussion.
+        Thank you for proposing an improvement. Please provide a clear user story, the proposed solution, and why this change is valuable.
   - type: input
     id: short_description
     attributes:
       label: "Short summary"
       description: "One-line description used in the issue title."
       placeholder: "e.g. Add CSV export for sample results"
-      required: true
   - type: textarea
     id: user_story
     attributes:
       label: "User story / Use case"
       description: "Describe who benefits and what they want to achieve (e.g. As a ..., I want ..., so that ...)."
       placeholder: "As a lab technician, I want to export results to CSV so that I can share data with collaborators."
-      required: true
   - type: textarea
     id: proposed_solution
     attributes:
@@ -44,13 +42,9 @@ body:
       label: "Priority"
       description: "How urgent/important is this feature?"
       options:
-        - label: "High"
-          value: "high"
-        - label: "Medium"
-          value: "medium"
-        - label: "Low"
-          value: "low"
-      required: true
+        - "High"
+        - "Medium"
+        - "Low"
   - type: input
     id: estimate
     attributes:
@@ -75,14 +69,10 @@ body:
       label: "Checklist"
       description: "Please confirm before submitting"
       options:
-        - label: "I searched existing issues and PRs"
-          value: "checked_searched"
-        - label: "I provided a clear user story and acceptance criteria"
-          value: "checked_user_story"
-        - label: "I am willing to help implement or test this change"
-          value: "checked_help"
-        - label: "I did not include any secrets or credentials"
-          value: "checked_no_secrets"
+        - "I searched existing issues and PRs"
+        - "I provided a clear user story and acceptance criteria"
+        - "I am willing to help implement or test this change"
+        - "I did not include any secrets or credentials"
   - type: markdown
     attributes:
       value: |

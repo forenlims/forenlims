@@ -1,6 +1,6 @@
 version: 1
 name: "Bug report"
-about: "Use this form to report unexpected behaviour or errors. If this is a security vulnerability, do NOT open a public issue — see SECURITY.md for private reporting."
+description: "Report unexpected behaviour or errors. For security issues, do NOT open a public issue — see SECURITY.md."
 title: "[bug] {short_description}"
 labels: ["bug"]
 body:
@@ -14,7 +14,6 @@ body:
       label: "Short summary"
       description: "One-line description of the problem (used in the issue title)."
       placeholder: "e.g. Crash when saving a sample record"
-      required: true
   - type: textarea
     id: steps_to_reproduce
     attributes:
@@ -24,19 +23,16 @@ body:
         1. Do X
         2. Do Y
         3. Observe Z
-      required: true
   - type: textarea
     id: expected_behavior
     attributes:
       label: "Expected behavior"
       description: "What did you expect to happen?"
-      required: true
   - type: textarea
     id: actual_behavior
     attributes:
       label: "Actual behavior"
       description: "What actually happened, including error messages or incorrect output."
-      required: true
   - type: textarea
     id: logs
     attributes:
@@ -47,7 +43,7 @@ body:
     id: reproduction_url
     attributes:
       label: "Minimal reproduction (optional)"
-      description: "Link to a minimal repro (repository, gist, or paste). Very helpful."
+      description: "Link to a minimal repro (repository, gist, or paste)."
       placeholder: "https://github.com/your/repro"
   - type: dropdown
     id: severity
@@ -55,17 +51,11 @@ body:
       label: "Severity"
       description: "How severe is the issue for your workflow?"
       options:
-        - label: "blocker (data loss / crash)"
-          value: "blocker"
-        - label: "critical (major functionality broken)"
-          value: "critical"
-        - label: "major (important but workable)"
-          value: "major"
-        - label: "minor (small bug / cosmetic)"
-          value: "minor"
-        - label: "trivial (typo / docs)"
-          value: "trivial"
-      required: true
+        - "blocker (data loss / crash)"
+        - "critical (major functionality broken)"
+        - "major (important but workable)"
+        - "minor (small bug / cosmetic)"
+        - "trivial (typo / docs)"
   - type: input
     id: forenlims_version
     attributes:
@@ -84,13 +74,10 @@ body:
       label: "Checklist"
       description: "Please confirm before submitting"
       options:
-        - label: "I have searched for existing issues and PRs"
-          value: "checked_searched"
-        - label: "I can reproduce this problem consistently"
-          value: "checked_repro"
-        - label: "I did not include any secrets or credentials in this report"
-          value: "checked_no_secrets"
+        - "I have searched for existing issues and PRs"
+        - "I can reproduce this problem consistently"
+        - "I did not include any secrets or credentials in this report"
   - type: markdown
     attributes:
       value: |
-        Thanks — a maintainer will triage this issue. If the problem is security-sensitive, follow SECURITY.md for private reporting instead of
+        Thanks — a maintainer will triage this issue. If the problem is security-sensitive, follow SECURITY.md for private reporting instead of opening a public issue.
