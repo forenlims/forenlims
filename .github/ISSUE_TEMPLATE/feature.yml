@@ -1,0 +1,36 @@
+name: Feature request
+about: Suggest a new feature or improvement
+title: "[FEATURE] "
+labels: enhancement
+assignees: ""
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Describe the feature**
+        A clear and concise description of what you want to happen.
+
+  - type: input
+    attributes:
+      label: Motivation
+      description: Why is this feature needed?
+      required: true
+      default: ""
+
+  - type: input
+    attributes:
+      label: Use Cases / Example
+      description: How would this feature be used?
+      required: false
+      default: ""
+
+  - type: dropdown
+    attributes:
+      label: Priority
+      description: How important is this feature?
+      options:
+        - Low
+        - Medium
+        - High
+      required: true
