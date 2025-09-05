@@ -30,3 +30,6 @@ extend-exclude = [
   "manage.py"
 ]
 extend-ignore = [ "RUF012" ]
+
+[tool.djlint]
+profile="django"
