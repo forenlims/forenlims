@@ -1,4 +1,3 @@
-version: 1
 name: "Feature request"
 description: "Propose a new feature or enhancement. Describe the user need, proposed solution and benefits."
 title: "[feature] {short_description}"
@@ -18,33 +17,32 @@ body:
     id: user_story
     attributes:
       label: "User story / Use case"
-      description: "Describe who benefits and what they want to achieve (e.g. As a ..., I want ..., so that ...)."
-      placeholder: "As a lab technician, I want to export results to CSV so that I can share data with collaborators."
+      description: "Describe who benefits and what they want to achieve."
+      placeholder: "As a lab technician, I want to export results to CSV so that I can share data."
   - type: textarea
     id: proposed_solution
     attributes:
       label: "Proposed solution"
-      description: "Outline a possible implementation or API/UX changes. Optional but helpful."
-      placeholder: "Add an `export` endpoint that streams CSV, or a UI button on the results page."
+      description: "Outline a possible implementation or API/UX changes."
   - type: textarea
     id: benefits
     attributes:
       label: "Benefits / Rationale"
-      description: "Why is this feature important? Describe expected improvements or use cases."
+      description: "Why is this feature important?"
   - type: textarea
     id: alternatives
     attributes:
       label: "Alternatives considered"
-      description: "Other approaches evaluated (e.g. third-party tools, manual workaround)."
+      description: "Other approaches evaluated."
   - type: dropdown
     id: priority
     attributes:
       label: "Priority"
       description: "How urgent/important is this feature?"
       options:
-        - "High"
-        - "Medium"
-        - "Low"
+        - label: "High"
+        - label: "Medium"
+        - label: "Low"
   - type: input
     id: estimate
     attributes:
@@ -69,10 +67,10 @@ body:
       label: "Checklist"
       description: "Please confirm before submitting"
       options:
-        - "I searched existing issues and PRs"
-        - "I provided a clear user story and acceptance criteria"
-        - "I am willing to help implement or test this change"
-        - "I did not include any secrets or credentials"
+        - label: "I searched existing issues and PRs"
+        - label: "I provided a clear user story and acceptance criteria"
+        - label: "I am willing to help implement or test this change"
+        - label: "I did not include any secrets or credentials"
   - type: markdown
     attributes:
       value: |
