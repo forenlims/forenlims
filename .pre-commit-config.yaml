@@ -1,0 +1,19 @@
+exclude: .*migrations\/.*
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-toml
+      - id: detect-private-key
+      - id: double-quote-string-fixer
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.12.12"
+    hooks:
+      - id: ruff-check
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.36.4
+    hooks:
+      - id: djlint-django

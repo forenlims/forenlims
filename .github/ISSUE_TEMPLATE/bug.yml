@@ -1,0 +1,29 @@
+name: Bug report
+about: Report a bug
+title: "[BUG] "
+labels: bug
+assignees: ""
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Describe the bug**
+        A clear and concise description of what the bug is.
+
+  - type: input
+    attributes:
+      label: Steps to reproduce
+      description: How to reproduce the behavior?
+      required: true
+      default: ""
+
+  - type: dropdown
+    attributes:
+      label: Severity
+      description: How severe is the bug?
+      options:
+        - Low
+        - Medium
+        - High
+      required: true
