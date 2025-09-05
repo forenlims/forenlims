@@ -1,13 +1,12 @@
-version: 1
 name: "Bug report"
-description: "Report unexpected behaviour or errors. For security issues, do NOT open a public issue — see SECURITY.md."
+description: "Report unexpected behavior or errors. For security issues, do NOT open a public issue — see SECURITY.md."
 title: "[bug] {short_description}"
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for taking the time to report a bug. Please provide a minimal, reproducible example and any logs or tracebacks that help diagnose the issue.
+        Thank you for reporting a bug. Provide a minimal, reproducible example and any logs or tracebacks that help diagnose the issue.
   - type: input
     id: short_description
     attributes:
@@ -18,7 +17,7 @@ body:
     id: steps_to_reproduce
     attributes:
       label: "Steps to reproduce"
-      description: "Step-by-step instructions to reproduce the problem. Keep it minimal and exact."
+      description: "Step-by-step instructions to reproduce the problem."
       placeholder: |
         1. Do X
         2. Do Y
@@ -32,18 +31,18 @@ body:
     id: actual_behavior
     attributes:
       label: "Actual behavior"
-      description: "What actually happened, including error messages or incorrect output."
+      description: "What actually happened, including errors."
   - type: textarea
     id: logs
     attributes:
       label: "Relevant logs / tracebacks"
-      description: "Paste error tracebacks, console output or server logs. Wrap large outputs in triple backticks."
+      description: "Paste error tracebacks, console output or server logs."
       placeholder: "Traceback (most recent call last):\n  ..."
   - type: input
     id: reproduction_url
     attributes:
       label: "Minimal reproduction (optional)"
-      description: "Link to a minimal repro (repository, gist, or paste)."
+      description: "Link to a minimal repro (repo, gist, or paste)."
       placeholder: "https://github.com/your/repro"
   - type: dropdown
     id: severity
@@ -51,17 +50,17 @@ body:
       label: "Severity"
       description: "How severe is the issue for your workflow?"
       options:
-        - "blocker (data loss / crash)"
-        - "critical (major functionality broken)"
-        - "major (important but workable)"
-        - "minor (small bug / cosmetic)"
-        - "trivial (typo / docs)"
+        - label: "blocker (data loss / crash)"
+        - label: "critical (major functionality broken)"
+        - label: "major (important but workable)"
+        - label: "minor (small bug / cosmetic)"
+        - label: "trivial (typo / docs)"
   - type: input
     id: forenlims_version
     attributes:
       label: "ForenLIMS version / commit"
       description: "Version, tag or commit SHA where the bug was observed (if known)."
-      placeholder: "e.g. branch main @ abc1234"
+      placeholder: "e.g. main @ abc1234"
   - type: input
     id: environment
     attributes:
@@ -74,9 +73,9 @@ body:
       label: "Checklist"
       description: "Please confirm before submitting"
       options:
-        - "I have searched for existing issues and PRs"
-        - "I can reproduce this problem consistently"
-        - "I did not include any secrets or credentials in this report"
+        - label: "I searched for existing issues and PRs"
+        - label: "I can reproduce this problem consistently"
+        - label: "I did not include any secrets or credentials"
   - type: markdown
     attributes:
       value: |
