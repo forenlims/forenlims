@@ -12,8 +12,6 @@ updates:
     ignore:
       - dependency-name: "django"
         versions: ["<4.4"] # optional, falls noch alte Django-Version getestet wird
-    reviewers:
-      - onkeld
     target-branch: main
   - package-ecosystem: "pip"
     directory: "/"
