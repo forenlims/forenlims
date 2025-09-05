@@ -175,6 +175,26 @@ files = [
 ]
 
 [[package]]
+name = "git-cliff"
+version = "2.10.0"
+description = "A highly customizable changelog generator ⛰️"
+optional = false
+python-versions = ">=3.7"
+groups = ["dev"]
+files = [
+    {file = "git_cliff-2.10.0-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:87eb39c6d2e14685d97329bced8965423d2c6a63a5b3940c67b4897defcf250d"},
+    {file = "git_cliff-2.10.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:f231ce77134bccc8fd1460322810105305ce40b0ece2afbfa8064c7114f33552"},
+    {file = "git_cliff-2.10.0-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9e7569bc299eb0f472d5953f4cccb327d70ddb85b000fa5bc55aa37dc68f512d"},
+    {file = "git_cliff-2.10.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cc2395a0eba440dabbeb7ecef48ed3467b21a59f50a40a529db762ce46ea9bf9"},
+    {file = "git_cliff-2.10.0-py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:a723a03a95576daf8fccfc0fd19ac125e78bca59c604cc9dfa4cae1feb241326"},
+    {file = "git_cliff-2.10.0-py3-none-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:996cd311989f4a98fd65d7aaef0b6e905ebaf3baeb5ccf282e543b975a12bde8"},
+    {file = "git_cliff-2.10.0-py3-none-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:8cff49c8c950e8ee512e5e3256602f39a111a7121017a74e3a75fcad618babc5"},
+    {file = "git_cliff-2.10.0-py3-none-win32.whl", hash = "sha256:23b7638ad3b62e3175044331b2faef8a918fdd52e5a222db818dbd5492632299"},
+    {file = "git_cliff-2.10.0-py3-none-win_amd64.whl", hash = "sha256:0df87ff65bf484647290bb8bfb1104d5e283945eb44090a9e49ea3c520e8b64d"},
+    {file = "git_cliff-2.10.0.tar.gz", hash = "sha256:35a196b879f5b3beb47859bffc24d2c2c8e672db4f1ddfc45c334d742a2a5071"},
+]
+
+[[package]]
 name = "identify"
 version = "2.6.13"
 description = "File identification library for Python"
@@ -556,4 +576,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "d52115e47729297809e144406c61f80710386051a769656ea9f060e96efe3cbd"
+content-hash = "99122bb98c4c958eb37089d643ee55e67b92c3adb42b3a0e93093cf8ae77b795"
