@@ -33,7 +33,7 @@ jobs:
         restore-keys: ${{ runner.os }}-poetry-
 
     - name: Install dependencies
-      run: poetry install -S
+      run: poetry install
 
     - name: Run Ruff
       run: poetry run ruff check .
