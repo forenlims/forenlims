@@ -80,3 +80,4 @@ body:
     attributes:
       value: |
         Thanks — a maintainer will triage this issue. If the problem is security-sensitive, follow SECURITY.md for private reporting instead of opening a public issue.
+        Thanks — a maintainer will triage this issue. If the problem is security-sensitive, follow SECURITY.md for private reporting instead of opening a public issue.
