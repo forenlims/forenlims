@@ -1,4 +1,3 @@
-# ruff: noqa: E501
 """
 WSGI config for django_forenlims_core project.
 
@@ -12,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_forenlims_core.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 
 application = get_wsgi_application()
