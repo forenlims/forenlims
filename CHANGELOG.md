@@ -1,14 +1,18 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-This project follows "Keep a Changelog" and semantic versioning.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-- Project skeleton: README, CONTRIBUTING, SECURITY.
-- CI and pre-commit configuration.
-- Poetry-based development setup and Python version pinning.
-- Linters and formatters configured: Ruff, djLint, pre-commit hooks.
-- Placeholder for future features, fixes and breaking changes.
+### Added
 
-*No released versions yet.*
+- Add Basic Static Pages App
+
+### Changed
+
+## New Contributors
+
+* @onkeld made their first contribution
