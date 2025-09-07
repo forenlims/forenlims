@@ -9,7 +9,8 @@ license = {text = "Apache License 2.0"}
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "django (>=5.2.6,<6.0.0)"
+    "django (>=5.2.6,<6.0.0)",
+    "django-allauth (>=65.11.1,<66.0.0)"
 ]
 
 [build-system]
@@ -32,7 +33,8 @@ indent-width = 4
 lint.select = ["E", "F", "W", "ANN", "PL", "RUF", "DJ", "I", "N", "S", "PT",]
 
 extend-exclude = [
-  "manage.py"
+  "manage.py",
+  "*/migrations/*",
 ]
 lint.extend-ignore = [ "RUF012" ]
 

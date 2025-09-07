@@ -11,6 +11,14 @@
         <title>Basic Django Project</title>
     </head>
     <body>
+        {% if user.is_authenticated %}
+            <p>Username: {{ user.username }}</p>
+            <p>Email: {{ user.email }}</p>
+            <a href="{% url 'account_logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'account_login' %}">Login</a>
+            <a href="{% url 'account_signup' %}">Signup</a>
+        {% endif %}
         {% block content %}
         {% endblock content %}
     </body>
