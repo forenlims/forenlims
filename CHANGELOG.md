@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add Basic Static Pages App
+- Add Accounts Controls To Views
+- Add Initial Migration for Accounts App
+- Add Django-Allauth to Dependencies
+- Add Accounts App
+- Add Static Pages App by @onkeld
 
 ### Changed
 
