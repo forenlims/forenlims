@@ -17,9 +17,11 @@
     "LIMS",
     "laboratory",
     "Django",
-    "open-source""frontend",
+    "open-source",
+    "frontend"
   ],
-  "author": "The ForenLIMS Team""license": "Apache-2.0",
+  "author": "The ForenLIMS Team",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/forenlims/forenlims/issues"
   },
