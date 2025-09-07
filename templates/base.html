@@ -1,3 +1,5 @@
+{% load webpack_loader static %}
+<!-- new -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,7 +10,9 @@
               content="ForenLIMS is an open-source Laboratory Information Management System for forensic genetics, built with Django.">
         <meta name="keywords"
               content="forensic, genetics, LIMS, laboratory, Django, open-source">
-        <title>Basic Django Project</title>
+        <title>ForenLIMS</title>
+        {% stylesheet_pack 'app' %}
+        {% javascript_pack 'app' attrs='defer' %}
     </head>
     <body>
         {% if user.is_authenticated %}
