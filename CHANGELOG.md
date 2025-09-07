@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Accounts Controls To Views by @onkeld
 - Add .env Support to the Project by @onkeld
 - Add TailwindCSS via Webpack by @onkeld
+- Add Hotwire Stimulus Javascript Framework via Webpack by @onkeld
 
 ### Changed
 
