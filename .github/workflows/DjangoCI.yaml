@@ -2,7 +2,8 @@ permissions:
   contents: read
 
 name: Django CI
-
+env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
 on:
 
   pull_request:
