@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'webpack_boilerplate',
+    'pages.apps.PagesConfig',
     'accounts.apps.AccountsConfig',
     'allauth',
     'allauth.account',
