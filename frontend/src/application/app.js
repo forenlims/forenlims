@@ -1,15 +1,10 @@
 
 // This is the style entry file
 import "../styles/index.css";
+import { Application } from "@hotwired/stimulus";
+import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers";
 
-// We can import other JS file as we like
-import Jumbotron from "../components/jumbotron";
+const application = Application.start();
 
-window.document.addEventListener("DOMContentLoaded", function () {
-  window.console.log("dom ready");
-
-  // Find elements and initialize
-  for (const elem of document.querySelectorAll(Jumbotron.selector())) {
-    new Jumbotron(elem);
-  }
-});
+const context = require.context("../controllers", true, /\.js$/);
+application.load(definitionsFromContext(context));
