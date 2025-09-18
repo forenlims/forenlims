@@ -36,8 +36,8 @@ jobs:
     - name: Run djLint
       run: poetry run djlint --check .
 
-    - name: Run Django tests
-      run: poetry run python manage.py test
+    - name: Run Pytest with Coverage
+      run: poetry run pytest
 
   deploy:
     needs: build
