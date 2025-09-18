@@ -1,6 +1,7 @@
 
 // This is the style entry file
 import "../styles/turbo_drive.css";
+import "@hotwired/turbo";
 import { Application } from "@hotwired/stimulus";
 import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers";
 
@@ -11,4 +12,7 @@ application.load(definitionsFromContext(context));
 
 window.document.addEventListener("DOMContentLoaded", function () {
   window.console.log("dom ready");
+});
+document.addEventListener('turbo:load', function () {     // new
+  console.log('turbo:load');
 });
