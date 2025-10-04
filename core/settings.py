@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 import environ
+from django.utils.translation import gettext_lazy as _
 
 env = environ.Env(
     DEBUG=(bool, False)
@@ -128,8 +129,8 @@ USE_I18N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ('en', 'English'),
-    ('de', 'German'),
+    ('en', _('English')),
+    ('de', _('German')),
 ]
 
 LANGUAGE_BIDI = False  # Set to True for RTL languages, False otherwise

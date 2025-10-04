@@ -1,8 +1,7 @@
 {% load webpack_loader static %}
 {% load i18n %}
-<!-- new -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% get_current_language as current_language %} {{ current_language }}">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,7 +25,7 @@
                               data-turbo="false">
                             {% csrf_token %}
                             <input type="hidden" name="next" value="{{ request.path }}">
-                            <label for="language-select">Choose your language:</label>
+                            <label for="language-select">{% trans "Choose your language:" %}</label>
                             {% get_current_language as current_language %}
                             {% load language_tags %}
                             <select id="language-select" name="language">
@@ -39,7 +38,7 @@
                             </select>
                             <button type="submit"
                                     class="ml-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
-                                Switch
+                                {% trans "Switch" %}
                             </button>
                         </form>
                     </div>
