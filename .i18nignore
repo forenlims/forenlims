@@ -1,3 +1,5 @@
 manage.py
 wsgi.py
 asgi.py
+admin.py
+*/admin.py

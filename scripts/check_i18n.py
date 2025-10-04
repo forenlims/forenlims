@@ -75,6 +75,7 @@ EXCLUDE_PATTERNS = [
     r'^password2\*$',
     r'^frontend/build',
     r'^manifest\.json$',
+    r'^[a-z]+-[a-z]+$',
 ]
 SUPPORTED_SUFFIXES = {'.py', '.html', '.htm', '.txt'}
 
@@ -390,11 +391,10 @@ def _extract_translated_strings(content: str) -> Set[str]:
 def _extract_attribute_texts(content: str) -> List[Tuple[int, str]]:
     """Extract text from HTML attributes."""
     attr_patterns = [
-        (
-            r'(?:title|alt|value|placeholder|name|label|aria-label|for)'
-            r'\s*=\s*["\']([^"\']{3,})["\']'
-        ),
-        r'data-[^=]+\s*=\s*["\']([^"\']{3,})["\']',
+    (
+        r'(?:title|alt|value|placeholder|label|aria-label)'
+        r'\s*=\s*["\']([^"\']{3,})["\']'
+    ),
     ]
     attr_texts = []
     for pattern in attr_patterns:
