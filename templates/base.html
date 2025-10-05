@@ -1,7 +1,7 @@
 {% load webpack_loader static %}
-<!-- new -->
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% get_current_language as current_language %} {{ current_language }}">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,14 +15,48 @@
         {% javascript_pack 'turbo_drive' attrs='defer' %}
     </head>
     <body>
-        {% if user.is_authenticated %}
-            <p>Username: {{ user.username }}</p>
-            <p>Email: {{ user.email }}</p>
-            <a href="{% url 'account_logout' %}">Logout</a>
-        {% else %}
-            <a href="{% url 'account_login' %}">Login</a>
-            <a href="{% url 'account_signup' %}">Signup</a>
-        {% endif %}
+        <header>
+            <nav>
+                {% block language_switcher %}
+                    <div>
+                        <form method="post"
+                              action="{% url 'set_language' %}"
+                              class="inline-block"
+                              data-turbo="false">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <label for="language-select">{% trans "Choose your language:" %}</label>
+                            {% get_current_language as current_language %}
+                            {% load language_tags %}
+                            <select id="language-select" name="language">
+                                {% get_current_language as current_language %}
+                                {% get_languages as languages %}
+                                {% for code, name in languages %}
+                                    <option value="{{ code }}"
+                                            {% if current_language == code %}selected{% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit"
+                                    class="ml-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
+                                {% trans "Switch" %}
+                            </button>
+                        </form>
+                    </div>
+                {% endblock language_switcher %}
+                {% block user_profile %}
+                    <div>
+                        {% if user.is_authenticated %}
+                            <p>Username: {{ user.username }}</p>
+                            <p>Email: {{ user.email }}</p>
+                            <a href="{% url 'account_logout' %}">Logout</a>
+                        {% else %}
+                            <a href="{% url 'account_login' %}">Login</a>
+                            <a href="{% url 'account_signup' %}">Signup</a>
+                        {% endif %}
+                    </div>
+                {% endblock user_profile %}
+            </nav>
+        </header>
         {% block content %}
         {% endblock content %}
     </body>
