@@ -17,15 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: templates/base.html:28
-msgid "Choose your language:"
+#: core/settings.py:132
+msgid "English"
 msgstr ""
 
-#: templates/base.html:41
-msgid "Switch"
+#: core/settings.py:133
+msgid "German"
 msgstr ""
-
-#: templates/pages/home.html:4
-msgid "Helllloooooo!"
-msgstr "Mooooin!"
