@@ -20,11 +20,11 @@ msgstr ""
 
 #: templates/base.html:28
 msgid "Choose your language:"
-msgstr ""
+msgstr "Wählen Sie Ihre Sprache"
 
 #: templates/base.html:41
 msgid "Switch"
-msgstr ""
+msgstr "Sprache Wechseln"
 
 #: templates/pages/home.html:4
 msgid "Helllloooooo!"

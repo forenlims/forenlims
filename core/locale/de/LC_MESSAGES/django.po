@@ -23,4 +23,4 @@ msgstr ""
 
 #: core/settings.py:133
 msgid "German"
-msgstr ""
+msgstr "Deutsch"
