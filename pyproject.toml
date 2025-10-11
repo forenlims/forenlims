@@ -38,13 +38,20 @@ faker = "^37.6.0"
 target-version = "py313"
 line-length = 79
 indent-width = 4
-lint.select = ["E", "F", "W", "ANN", "PL", "RUF", "DJ", "I", "N", "S", "PT",]
-
 extend-exclude = [
   "manage.py",
   "*/migrations/*",
 ]
-lint.extend-ignore = [ "RUF012" ]
+[tool.ruff.lint]
+select = ["E", "F", "W", "ANN", "PL", "RUF", "DJ", "I", "N", "S", "PT",]
+extend-ignore = [ "RUF012" ]
+
+# Ignore security rules in test files
+[tool.ruff.lint.per-file-ignores]
+"**/test*.py" = ["S101", "S105", "S106", "PLR2004"]
+"**/conftest.py" = ["S101", "S105", "S106"]
+"**/factories.py" = ["S105", "S106"]
+"tests/**/*.py" = ["S101", "S105", "S106", "PLR2004"]
 
 [tool.djlint]
 profile="django"
