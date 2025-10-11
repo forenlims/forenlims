@@ -3,7 +3,7 @@ permissions:
 
 name: Django CI
 env:
-  DJANGO_DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
 on:
   pull_request:
   push:
