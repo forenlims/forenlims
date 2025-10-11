@@ -4,6 +4,7 @@ permissions:
 name: Django CI
 env:
   DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DJANGO_DEBUG: "TURE"
 on:
   pull_request:
   push:
