@@ -3,9 +3,8 @@ permissions:
 
 name: Django CI
 env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DJANGO_DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
 on:
-
   pull_request:
   push:
     branches:
@@ -16,34 +15,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.13
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.13
 
-    - name: Set up Poetry
-      uses: matrix-org/setup-python-poetry@5bbf6603c5c930615ec8a29f1b5d7d258d905aa4
+      - name: Set up Poetry
+        uses: matrix-org/setup-python-poetry@5bbf6603c5c930615ec8a29f1b5d7d258d905aa4
 
-    - name: Install dependencies
-      run: poetry install
+      - name: Install dependencies
+        run: poetry install
 
-    - name: Run Ruff
-      run: poetry run ruff check .
+      - name: Run Ruff
+        run: poetry run ruff check .
 
-    - name: Run djLint
-      run: poetry run djlint --check .
+      - name: Run djLint
+        run: poetry run djlint --check .
 
-    - name: Run Pytest with Coverage
-      run: poetry run pytest
+      - name: Run Pytest with Coverage
+        run: poetry run pytest
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to Production
-      run: |
-        # Add your deployment script or commands here
+      - name: Deploy to Production
+        run: |
+          # Add your deployment script or commands here
