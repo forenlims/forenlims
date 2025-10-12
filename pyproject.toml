@@ -13,7 +13,8 @@ dependencies = [
     "django-allauth (>=65.11.1,<66.0.0)",
     "django-environ (>=0.12.0,<0.13.0)",
     "python-webpack-boilerplate (>=1.0.4,<2.0.0)",
-    "psycopg (>=3.2.10,<4.0.0)"
+    "psycopg (>=3.2.10,<4.0.0)",
+    "django-auditlog (>=3.3.0,<4.0.0)"
 ]
 
 [build-system]
