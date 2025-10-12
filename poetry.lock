@@ -417,6 +417,21 @@ Django = ">=4.2"
 python-dateutil = ">=2.7.0"
 
 [[package]]
+name = "django-cid"
+version = "3.0"
+description = "Correlation IDs in Django for debugging requests"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "django-cid-3.0.tar.gz", hash = "sha256:12a21be3aaf6945be59a85eeb0ab47f97c09c947cf72947dc92c742a989826fd"},
+    {file = "django_cid-3.0-py3-none-any.whl", hash = "sha256:c785ae7d0bb0e74e3faba2bf45b558addece41b85387bff14df05f7110a56e65"},
+]
+
+[package.dependencies]
+django = ">=3.1"
+
+[[package]]
 name = "django-environ"
 version = "0.12.0"
 description = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
@@ -1349,4 +1364,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4"
-content-hash = "f8a1b7ef36c743e2c81118749613e85b020983e560ad4e534f5567759a8d2546"
+content-hash = "1ae42cda02545be29bf6e699e6028660c9230da44ccf1a57ddb7ee2f3050f701"

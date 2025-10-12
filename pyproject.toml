@@ -14,7 +14,8 @@ dependencies = [
     "django-environ (>=0.12.0,<0.13.0)",
     "python-webpack-boilerplate (>=1.0.4,<2.0.0)",
     "psycopg (>=3.2.10,<4.0.0)",
-    "django-auditlog (>=3.3.0,<4.0.0)"
+    "django-auditlog (>=3.3.0,<4.0.0)",
+    "django-cid (>=3.0,<4.0)"
 ]
 
 [build-system]
