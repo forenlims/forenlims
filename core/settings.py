@@ -51,10 +51,11 @@ INSTALLED_APPS = [
     'webpack_boilerplate',
     'cid.apps.CidAppConfig',
     'auditlog',
-    'pages.apps.PagesConfig',
-    'accounts.apps.AccountsConfig',
     'allauth',
     'allauth.account',
+    'pages.apps.PagesConfig',
+    'accounts.apps.AccountsConfig',
+    'auditlog.apps.AudittrailConfig',
 ]
 
 MIDDLEWARE = [
