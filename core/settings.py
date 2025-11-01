@@ -37,7 +37,6 @@ DEBUG = env('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,7 +54,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'pages.apps.PagesConfig',
     'accounts.apps.AccountsConfig',
-    'auditlog.apps.AudittrailConfig',
+    'audittrail.apps.AudittrailConfig',
 ]
 
 MIDDLEWARE = [
@@ -188,3 +187,52 @@ WEBPACK_LOADER = {
 SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=False)
 SESSION_COOKIE_SECURE = env.bool('DJANGO_SESSION_COOKIE_SECURE', default=False)
 CSRF_COOKIE_SECURE = env.bool('DJANGO_CSRF_COOKIE_SECURE', default=False)
+
+# CID Configuration
+CID_GENERATE = True
+CID_CONCATENATE_IDS = True
+CID_HEADER = 'HTTP_X_CORRELATION_ID'
+CID_RESPONSE_HEADER = 'X-Correlation-ID'
+CID_SQL_COMMENTER_ENABLE = True
+
+# ============================================
+# Logging Configuration with CID
+# ============================================
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'correlation_id': {
+            '()': 'cid.log.CidContextFilter'
+        },
+    },
+    'formatters': {
+        'standard': {
+            'format': '[{levelname}] [{asctime}] [CID: {cid}] {name}: {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'filters': ['correlation_id'],
+            'formatter': 'standard',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'audittrail': {
+            'handlers': ['console'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG' if DEBUG else 'WARNING',
+            'filters': ['correlation_id'],
+        },
+    },
+}

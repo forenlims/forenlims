@@ -1,8 +1,11 @@
 # tests/conftest.py
 from typing import Any
 
-# Provide database access for all tests automatically
 import pytest
+
+# Provide database access for all tests automatically
+#from cid.locals import set_cid
+#import uuid
 
 
 @pytest.fixture(autouse=True)
