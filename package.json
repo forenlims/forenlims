@@ -60,7 +60,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
-    "@hotwired/turbo": "^8.0.13",
+    "@hotwired/turbo": "^8.0.21",
     "autoprefixer": "^10.4.21",
     "core-js": "^3.37.0"
   }
