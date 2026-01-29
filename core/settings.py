@@ -22,12 +22,24 @@ env = environ.Env(
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'), overwrite=True)
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'), overwrite=False)
 
+# SECURITY WARNING: keep the secret key used in production secret!
+# Prefer DJANGO_SECRET_KEY; fall back to SECRET_KEY env var.
+# Prefer DJANGO_SECRET_KEY, then SECRET_KEY, then CI fallback injected by workflow
+SECRET_KEY = (
+    os.environ.get('DJANGO_SECRET_KEY')
+    or os.environ.get('SECRET_KEY')
+    or os.environ.get('CI_DJANGO_SECRET_KEY')
+)
 
+if not SECRET_KEY:
+    from django.core.exceptions import ImproperlyConfigured
+    raise ImproperlyConfigured(
+        'The DJANGO_SECRET_KEY or SECRET_KEY environment variable must be set.'
+    )
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SECRET_KEY = env('DJANGO_SECRET_KEY')
