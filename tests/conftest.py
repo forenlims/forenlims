@@ -1,14 +1,48 @@
 # tests/conftest.py
+import json
+from pathlib import Path
 from typing import Any
 
 import pytest
-
-# Provide database access for all tests automatically
-#from cid.locals import set_cid
-#import uuid
+from django.conf import settings
 
 
 @pytest.fixture(autouse=True)
-def enable_db_access_for_all_tests(db: Any) -> None: # noqa: ANN401
+def enable_db_access_for_all_tests(db: Any) -> None:  # noqa: ANN401
     """Ensures the database is available for all tests."""
     pass
+
+
+@pytest.fixture(scope='session', autouse=True)
+def webpack_manifest(tmp_path_factory):
+    """
+    Ensure a small webpack manifest is available for all tests when the real
+    frontend/build/manifest.json is missing (e.g. CI or a dev environment
+    where the frontend isn't built).
+    """
+    try:
+        configured = settings.WEBPACK_LOADER.get('MANIFEST_FILE')
+    except Exception:
+        configured = None
+
+    if configured:
+        configured_path = Path(configured)
+        if configured_path.exists():
+            return
+
+    tmpdir = tmp_path_factory.mktemp('webpack')
+    manifest_path = tmpdir / 'manifest.json'
+    manifest_content = {
+        'main.js': '/static/main.js',
+        'main.css': '/static/main.css',
+    }
+    manifest_path.write_text(json.dumps(manifest_content), encoding='utf-8')
+
+    loader = dict(getattr(settings, 'WEBPACK_LOADER', {}))
+    loader['MANIFEST_FILE'] = str(manifest_path)
+    try:
+        settings.WEBPACK_LOADER.update(loader)
+    except Exception:
+        setattr(settings, 'WEBPACK_LOADER', loader)
+
+    return
