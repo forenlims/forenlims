@@ -16,10 +16,17 @@ def enable_db_access_for_all_tests(db: Any) -> None:  # noqa: ANN401
 @pytest.fixture(scope='session', autouse=True)
 def webpack_manifest(tmp_path_factory):
     """
-    Ensure a small webpack manifest is available for all tests when the real
-    frontend/build/manifest.json is missing (e.g. CI or a dev environment
-    where the frontend isn't built).
+    Provide a minimal manifest for tests when none exists.
+
+    Prefer not to overwrite an existing configured manifest file.
     """
+    manifest_content = {
+        'main.js': '/static/main.js',
+        'main.css': '/static/main.css',
+    }
+    manifest_json = json.dumps(manifest_content)
+
+    configured = None
     try:
         configured = settings.WEBPACK_LOADER.get('MANIFEST_FILE')
     except Exception:
@@ -27,16 +34,18 @@ def webpack_manifest(tmp_path_factory):
 
     if configured:
         configured_path = Path(configured)
+        if not configured_path.is_absolute():
+            configured_path = Path.cwd() / configured_path
         if configured_path.exists():
             return
 
+        configured_path.parent.mkdir(parents=True, exist_ok=True)
+        configured_path.write_text(manifest_json, encoding='utf-8')
+        return
+
     tmpdir = tmp_path_factory.mktemp('webpack')
     manifest_path = tmpdir / 'manifest.json'
-    manifest_content = {
-        'main.js': '/static/main.js',
-        'main.css': '/static/main.css',
-    }
-    manifest_path.write_text(json.dumps(manifest_content), encoding='utf-8')
+    manifest_path.write_text(manifest_json, encoding='utf-8')
 
     loader = dict(getattr(settings, 'WEBPACK_LOADER', {}))
     loader['MANIFEST_FILE'] = str(manifest_path)
