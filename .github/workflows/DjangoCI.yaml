@@ -67,14 +67,11 @@ jobs:
           MANIFEST_PATH="frontend/build/manifest.json"
           if [ ! -f "$MANIFEST_PATH" ]; then
             mkdir -p "$(dirname "$MANIFEST_PATH")"
-            cat > "$MANIFEST_PATH" <<'JSON'
-            {"main.js": "/static/main.js", "main.css": "/static/main.css"}
-            JSON
+            printf '%s\n' '{"main.js": "/static/main.js", "main.css": "/static/main.css"}' > "$MANIFEST_PATH"
             echo "Wrote fallback manifest at $MANIFEST_PATH"
           else
             echo "$MANIFEST_PATH already exists"
           fi
-
       - name: Run Ruff
         run: poetry run ruff check .
 
