@@ -20,9 +20,26 @@ def webpack_manifest(tmp_path_factory):
 
     Prefer not to overwrite an existing configured manifest file.
     """
+    # webpack_boilerplate expects this format with entrypoints
     manifest_content = {
-        'main.js': '/static/main.js',
-        'main.css': '/static/main.css',
+        'entrypoints': {
+            'turbo_drive': {
+                'assets': {
+                    'js': ['/static/js/turbo_drive.js'],
+                    'css': ['/static/css/turbo_drive.css']
+                }
+            },
+            'main': {
+                'assets': {
+                    'js': ['/static/js/main.js'],
+                    'css': ['/static/css/main.css']
+                }
+            }
+        },
+        'turbo_drive.js': '/static/js/turbo_drive.js',
+        'turbo_drive.css': '/static/css/turbo_drive.css',
+        'main.js': '/static/js/main.js',
+        'main.css': '/static/css/main.css',
     }
     manifest_json = json.dumps(manifest_content)
 
