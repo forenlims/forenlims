@@ -5,6 +5,11 @@ name: Django CI
 env:
   DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
   DJANGO_DEBUG: ${{ secrets.DJANGO_DEBUG }}
+  POSTGRES_USER: forenlims
+  POSTGRES_PASSWORD: forenlims
+  POSTGRES_DB: forenlims_test
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
 on:
   pull_request:
   push:
