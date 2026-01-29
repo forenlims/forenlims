@@ -3,7 +3,7 @@ permissions:
 
 name: Django CI
 env:
-  DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
   DJANGO_DEBUG: ${{ secrets.DJANGO_DEBUG }}
   POSTGRES_USER: forenlims
   POSTGRES_PASSWORD: forenlims
