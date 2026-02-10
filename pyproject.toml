@@ -12,7 +12,10 @@ dependencies = [
     "django (>=5.2.6,<6.0.0)",
     "django-allauth (>=65.11.1,<66.0.0)",
     "django-environ (>=0.12.0,<0.13.0)",
-    "python-webpack-boilerplate (>=1.0.4,<2.0.0)"
+    "python-webpack-boilerplate (>=1.0.4,<2.0.0)",
+    "psycopg (>=3.2.10,<4.0.0)",
+    "django-auditlog (>=3.3.0,<4.0.0)",
+    "django-cid (>=3.0,<4.0)"
 ]
 
 [build-system]
@@ -47,10 +50,10 @@ extend-ignore = [ "RUF012" ]
 
 # Ignore security rules in test files
 [tool.ruff.lint.per-file-ignores]
-"**/test*.py" = ["S101", "S105", "S106", "PLR2004"]
+"**/test*.py" = ["S101", "S105", "S106", "PLR2004", "ANN001", "ANN201"]
 "**/conftest.py" = ["S101", "S105", "S106"]
 "**/factories.py" = ["S105", "S106"]
-"tests/**/*.py" = ["S101", "S105", "S106", "PLR2004"]
+"tests/**/*.py" = ["S101", "S105", "S106", "PLR2004", "ANN001", "ANN201"]
 
 [tool.djlint]
 profile="django"

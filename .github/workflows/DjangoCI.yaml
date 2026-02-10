@@ -4,7 +4,13 @@ permissions:
 name: Django CI
 env:
   DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-  DJANGO_DEBUG: "TURE"
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DJANGO_DEBUG: ${{ secrets.DJANGO_DEBUG }}
+  POSTGRES_USER: forenlims
+  POSTGRES_PASSWORD: forenlims
+  POSTGRES_DB: forenlims_test
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
 on:
   pull_request:
   push:
@@ -15,9 +21,50 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # PostgreSQL Service-Container
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: forenlims
+          POSTGRES_PASSWORD: forenlims
+          POSTGRES_DB: forenlims_test
+        ports:
+          - 5432:5432
+        # Health checks damit Tests erst starten wenn DB bereit ist
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: Ensure DJANGO_SECRET_KEY present (fallback for fork PRs)
+        run: |
+          if [ -z "${DJANGO_SECRET_KEY:-}" ]; then
+            # Set a CI-only fallback secret (only visible in the run environment)
+            echo "CI_DJANGO_SECRET_KEY=insecure-ci-secret-for-tests-only" >> $GITHUB_ENV
+            echo "CI fallback DJANGO secret written to CI_DJANGO_SECRET_KEY"
+          else
+            echo "DJANGO_SECRET_KEY present (secret provided)"
+          fi
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # oder '18' je nach Projekt
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -29,7 +76,16 @@ jobs:
 
       - name: Install dependencies
         run: poetry install
-
+      - name: Ensure frontend manifest exists for tests
+        run: |
+          MANIFEST_PATH="frontend/build/manifest.json"
+          if [ ! -f "$MANIFEST_PATH" ]; then
+            mkdir -p "$(dirname "$MANIFEST_PATH")"
+            printf '%s\n' '{"main.js": "/static/main.js", "main.css": "/static/main.css"}' > "$MANIFEST_PATH"
+            echo "Wrote fallback manifest at $MANIFEST_PATH"
+          else
+            echo "$MANIFEST_PATH already exists"
+          fi
       - name: Run Ruff
         run: poetry run ruff check .
 

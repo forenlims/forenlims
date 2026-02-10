@@ -17,26 +17,32 @@ import environ
 from django.utils.translation import gettext_lazy as _
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    DJANGO_DEBUG=(bool, False)
 )
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'), overwrite=True)
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'), overwrite=False)
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Prefer DJANGO_SECRET_KEY; fall back to SECRET_KEY env var.
+# Prefer DJANGO_SECRET_KEY, then SECRET_KEY, then CI fallback injected by workflow
+SECRET_KEY = (
+    os.environ.get('DJANGO_SECRET_KEY')
+    or os.environ.get('SECRET_KEY')
+    or os.environ.get('CI_DJANGO_SECRET_KEY')
+)
 
-SECRET_KEY = env('DJANGO_SECRET_KEY')
+if not SECRET_KEY:
+    from django.core.exceptions import ImproperlyConfigured
+    raise ImproperlyConfigured(
+        'The DJANGO_SECRET_KEY or SECRET_KEY environment variable must be set.'
+    )
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+# SECURITY WARNING: keep the secret key used in production secret!
+DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DJANGO_DEBUG')
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 # Application definition
 
@@ -49,13 +55,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'webpack_boilerplate',
-    'pages.apps.PagesConfig',
-    'accounts.apps.AccountsConfig',
+    'cid.apps.CidAppConfig',
+    'auditlog',
     'allauth',
     'allauth.account',
+    'pages.apps.PagesConfig',
+    'accounts.apps.AccountsConfig',
+    'audittrail.apps.AudittrailConfig',
 ]
 
 MIDDLEWARE = [
+    'cid.middleware.CidMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -63,7 +73,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'allauth.account.middleware.AccountMiddleware',  # new
+    'auditlog.middleware.AuditlogMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -72,7 +83,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR.joinpath('templates'))], # new
+        'DIRS': [str(BASE_DIR.joinpath('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,11 +103,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DB', default='forenlims_dev'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST', default='localhost'),
+        'PORT': env('POSTGRES_PORT', default='5432'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -176,4 +190,56 @@ STATIC_ROOT = BASE_DIR.joinpath('static')
 
 WEBPACK_LOADER = {
     'MANIFEST_FILE': BASE_DIR.joinpath('frontend/build/manifest.json'),
+}
+SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=False)
+SESSION_COOKIE_SECURE = env.bool('DJANGO_SESSION_COOKIE_SECURE', default=False)
+CSRF_COOKIE_SECURE = env.bool('DJANGO_CSRF_COOKIE_SECURE', default=False)
+
+# CID Configuration
+CID_GENERATE = True
+CID_CONCATENATE_IDS = True
+CID_HEADER = 'HTTP_X_CORRELATION_ID'
+CID_RESPONSE_HEADER = 'X-Correlation-ID'
+CID_SQL_COMMENTER_ENABLE = True
+
+# ============================================
+# Logging Configuration with CID
+# ============================================
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'correlation_id': {
+            '()': 'cid.log.CidContextFilter'
+        },
+    },
+    'formatters': {
+        'standard': {
+            'format': '[{levelname}] [{asctime}] [CID: {cid}] {name}: {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'filters': ['correlation_id'],
+            'formatter': 'standard',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'audittrail': {
+            'handlers': ['console'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG' if DEBUG else 'WARNING',
+            'filters': ['correlation_id'],
+        },
+    },
 }
