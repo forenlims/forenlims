@@ -1,4 +1,4 @@
-{% load webpack_loader static %}
+{% load static tailwind_tags %}
 {% load i18n %}
 <!DOCTYPE html>
 <html lang="{% get_current_language as current_language %} {{ current_language }}">
@@ -10,9 +10,15 @@
               content="ForenLIMS is an open-source Laboratory Information Management System for forensic genetics, built with Django.">
         <meta name="keywords"
               content="forensic, genetics, LIMS, laboratory, Django, open-source">
+        {% tailwind_preload_css %}
+        {% tailwind_css %}
         <title>ForenLIMS</title>
-        {% stylesheet_pack 'turbo_drive' %}
-        {% javascript_pack 'turbo_drive' attrs='defer' %}
+        {# Stimulus & Turbo from CDN #}
+        <script src="https://unpkg.com/@hotwired/stimulus@3.2.2/dist/stimulus.umd.js"></script>
+        <script type="module"
+                src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@latest/dist/turbo.es2017-esm.min.js"></script>
+        {# Local JS files #}
+        <script src="{% static 'js/application/turbo_drive.js' %}"></script>
     </head>
     <body>
         <header>
