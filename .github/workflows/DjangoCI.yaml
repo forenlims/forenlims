@@ -75,9 +75,7 @@ jobs:
 
       - name: Build Frontend Assets
 
-        run: |
-          export PATH="./node_modules/.bin:./theme/node_modules/.bin:$PATH"
-          poetry run python manage.py tailwind build
+        run: export PATH="./node_modules/.bin:./theme/node_modules/.bin:$PATH" && poetry run python manage.py tailwind build
       - name: Run Ruff
         run: poetry run ruff check .
 
