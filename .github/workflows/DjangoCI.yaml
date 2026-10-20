@@ -40,7 +40,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Ensure DJANGO_SECRET_KEY present (fallback for fork PRs)
         run: |
@@ -58,8 +58,10 @@ jobs:
           cache: "npm"
           cache-dependency-path: package-lock.json
 
-      - name: Install npm dependencies   # ❌ FEHLT!
-        run: npm ci
+      - name: Install npm dependencies
+        run: |
+          npm ci
+          cd theme && npm ci && cd ..
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
